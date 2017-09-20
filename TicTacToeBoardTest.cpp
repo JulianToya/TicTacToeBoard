@@ -45,6 +45,48 @@ TEST(TicTacToeBoardTest, toggleVarCheck)
   ASSERT_NE(prevTurn,nextTurn); 
 }
 
+TEST(TicTacToeBoardTest, toggleSetOBlank)
+{
+  TicTacToeBoard test;
+  Piece result;
+
+  result = test.toggleTurn();
+
+  ASSERT_NE(result,Blank); 
+}
+
+TEST(TicTacToeBoardTest, toggleSetOInvalid)
+{
+  TicTacToeBoard test;
+  Piece result;
+
+  result = test.toggleTurn();
+
+  ASSERT_NE(result,Invalid); 
+}
+
+TEST(TicTacToeBoardTest, toggleSetXBlank)
+{
+  TicTacToeBoard test;
+  Piece result;
+
+  test.toggleTurn();
+  result = test.toggleTurn();
+
+  ASSERT_NE(result,Blank); 
+}
+
+TEST(TicTacToeBoardTest, toggleSetXInvalid)
+{
+  TicTacToeBoard test;
+  Piece result;
+
+  test.toggleTurn();
+  result = test.toggleTurn();
+
+  ASSERT_NE(result,Invalid); 
+}
+
 TEST(TicTacToeBoardTest, placeWinner)
 {
   TicTacToeBoard test;
