@@ -33,15 +33,23 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-  if(i >= BOARDSIZE || j >= BOARDSIZE) {
+  if(getWinner() != Invalid) {
     return Invalid;
   }
-  else if(board[i][j] != Blank) {
-    return board[i][j];
+  else if(row >= BOARDSIZE || column >= BOARDSIZE || row < 0 || column < 0) {
+    toggleTurn();
+    return Invalid;
   }
-  board[i][j] == turn;
-  toggleTurn();
-  return Invalid;
+  else if(board[row][column] != Blank) {
+    toggleTurn();
+    return board[row][column];
+  }
+  else {
+    Piece temp = turn;
+    board[row][column] = turn;
+    toggleTurn();
+    return temp;
+  }
 }
 
 /**
@@ -50,7 +58,12 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
-  return Invalid;
+
+  if(row >= BOARDSIZE || column >= BOARDSIZE || row < 0 || column < 0) {
+    return Invalid; 
+  }
+  
+  return board[row][column];
 }
 
 /**
@@ -59,5 +72,74 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+  Piece last;
+  bool  winner = 0;
+
+  // Check rows for winner
+  for(unsigned i = 0; i < BOARDSIZE; ++i) {
+    if((last = board[i][0]) == Blank) {
+      continue;
+    }
+
+    for(unsigned j = 1; j < BOARDSIZE; ++j) {
+      if(last != board[i][j]) {
+        winner = 0;
+        break;
+      }        
+      winner = 1;
+    }
+  }
+
+  if(winner) {
+    return last;
+  }
+
+  // Check columns for winner
+  for(unsigned j = 0; j < BOARDSIZE; ++j) {
+    if((last = board[0][j]) == Blank) {
+      continue;
+    }
+
+    for(unsigned i = 1; i < BOARDSIZE; ++i) {
+      if(last != board[i][j]) {
+        winner = 0;
+        break;
+      }        
+      winner = 1;
+    }
+  }
+
+  if(winner) {
+    return last;
+  }
+
+  // Check diagonals for winner
+  for(unsigned j = 0; j < BOARDSIZE; j += 2) {
+    if((last = board[0][j]) == Blank) {
+      continue;
+    }
+
+    for(unsigned i = 1; i < BOARDSIZE; ++i) {
+      if(j < 2) {
+        if(last != board[i][j + i]) {
+          winner = 0;
+          break;
+        }        
+        winner = 1;
+      }
+      else {
+        if(last != board[i][j - i]) {
+          winner = 0;
+          break;
+        }        
+        winner = 1;
+      }
+    }
+    
+    if(winner) {
+      return last;
+    }
+  }
+
+  return Invalid;  // No winner yet 
 }
