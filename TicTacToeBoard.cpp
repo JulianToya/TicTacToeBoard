@@ -13,18 +13,13 @@ TicTacToeBoard::TicTacToeBoard()
       board[i][j] = Blank;
 }
 
-/*
-BUG: toggleTurn() should change the turn to the other player, store
-the new turn, and return that value. This bug causes the turn to 
-switch from O to Blank.
-*/
 /**
  * Switches turn member variable to represent whether it's X's or O's turn
  * and returns whose turn it is
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
-  return turn == X ? (turn = O) : (turn = Blank);  
+  return turn == X ? (turn = O) : (turn = X);  
 }
 
 /**

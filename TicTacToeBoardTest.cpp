@@ -76,12 +76,6 @@ TEST(TicTacToeBoardTest, toggleSetXBlank)
   ASSERT_NE(result,Blank); 
 }
 
-/*
-BUG: toggleTurn() should change the turn to the other player, store
-the new turn, and return that value. This bug causes the turn to 
-switch from O to Blank.
-*/
-
 TEST(TicTacToeBoardTest, toggleSetXInvalid)
 {
   TicTacToeBoard test;
