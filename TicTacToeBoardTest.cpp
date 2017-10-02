@@ -21,6 +21,7 @@ TEST(TicTacToeBoardTest, sanityCheck)
 }
 */
 
+
 TEST(TicTacToeBoardTest, toggleReturn)
 {
   TicTacToeBoard test;

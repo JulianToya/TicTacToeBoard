@@ -13,6 +13,7 @@ TicTacToeBoard::TicTacToeBoard()
       board[i][j] = Blank;
 }
 
+
 /**
  * Switches turn member variable to represent whether it's X's or O's turn
  * and returns whose turn it is
